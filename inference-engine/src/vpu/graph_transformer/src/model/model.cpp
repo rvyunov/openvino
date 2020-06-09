@@ -1922,7 +1922,8 @@ void ModelObj::cleanUp() {
                 "Input data {} must have at least one consumers, but got zero.", data->name());
             IE_ASSERT(data->_parentDataToDataEdge == nullptr);
         } else if (data->_usage == DataUsage::Output) {
-            IE_ASSERT(data->_producerEdge != nullptr);
+            VPU_THROW_UNLESS(data->_producerEdge != nullptr,
+                             "Output data {} must have at least one producer, but got zero.", data->name());
             IE_ASSERT(data->_parentDataToDataEdge == nullptr);
         } else if (data->_usage == DataUsage::Temp) {
             if (data->_tempBufferEdge == nullptr) {
