@@ -32,7 +32,11 @@ void FrontEnd::parseSwish(const Model& model, const ie::CNNLayerPtr& layer, cons
                      "Swish stage with name %s must have only 1 output, "
                      "actually provided %d", layer->name, outputs.size());
 
-    model->addNewStage<SwishStage>(layer->name, StageType::Swish, layer, inputs, outputs);
+    DataVector tempInputs = inputs;
+    if (tempInputs.size() == 1)
+        tempInputs.push_back(model->addFakeData());
+
+    model->addNewStage<SwishStage>(layer->name, StageType::Swish, layer, tempInputs, outputs);
 }
 
 }  // namespace vpu

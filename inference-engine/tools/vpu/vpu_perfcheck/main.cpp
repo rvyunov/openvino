@@ -287,9 +287,9 @@ static void getBINFiles(std::vector<std::string> &out, const std::string &direct
     closedir(dir);
 }
 
-int num_requests = 4;
+int num_requests = 1;
 
-#define MIN_ITER 1000
+#define MIN_ITER 1
 
 #define USE_CALLBACK
 
